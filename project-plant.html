@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Plant Monitoring & Smart Watering System, an IoT project with Raspberry Pi and Arduino by Natalie Aponte." />
+  <title>Plant Monitoring &amp; Smart Watering | Natalie Aponte</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <nav class="nav">
+      <button class="logo" type="button" title="Click me!">Natalie Aponte</button>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#journey">Experience</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="https://www.linkedin.com/in/natalie-aponte-533659195/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/nataliea0316" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" type="button" aria-label="Toggle color theme" aria-pressed="false">🌙</button>
+        <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="project-page">
+    <a href="index.html#projects" class="back-link">← Back to projects</a>
+
+    <section class="reveal">
+      <h2>🌿 Plant Monitoring &amp; Smart Watering</h2>
+      <p class="lead">
+        An IoT system that watches my plant’s soil moisture, waters it automatically and lets me check
+        on it from a live web dashboard.
+      </p>
+    </section>
+
+    <div class="project-layout">
+      <figure class="project-photo reveal">
+        <img src="images/IMG_3850.jpg"
+             alt="Raspberry Pi in a case and an Arduino board wired to a soil sensor in a potted plant"
+             width="1200" height="1496" loading="lazy" />
+        <figcaption>The setup: a Raspberry Pi on battery power, connected by USB to an Arduino reading the sensor in the pot.</figcaption>
+      </figure>
+
+      <div class="project-details">
+        <section class="reveal">
+          <h3>🧠 How It Works</h3>
+          <ul class="bullets">
+            <li>An Arduino reads the soil sensor and sends the readings to a Raspberry Pi over serial.</li>
+            <li>When the soil gets too dry, the system waters the plant automatically.</li>
+            <li>A Flask web dashboard shows moisture in real time and sends push notifications.</li>
+            <li>Every reading is logged, building a dataset for future machine learning predictions.</li>
+            <li>systemd starts everything automatically when the Pi boots.</li>
+          </ul>
+        </section>
+
+        <section class="reveal">
+          <h3>🔧 Built With</h3>
+          <ul class="project-tags">
+            <li>Python (Flask, threading, serial)</li>
+            <li>C++ (Arduino ADC, serial)</li>
+            <li>Linux (bash, systemd)</li>
+            <li>Raspberry Pi</li>
+            <li>Arduino</li>
+          </ul>
+        </section>
+
+        <section class="reveal">
+          <h3>🎯 What I Learned</h3>
+          <ul class="bullets">
+            <li>Debugging timing issues in serial communication.</li>
+            <li>Running and managing background services with systemd.</li>
+            <li>Collecting and preparing sensor data so a model can learn from it.</li>
+          </ul>
+        </section>
+
+        <div class="button-row">
+          <a href="https://github.com/nataliea0316/Water-Detection-System" class="button" target="_blank" rel="noopener">View Code on GitHub</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span class="year"></span> Natalie Aponte</p>
+  </footer>
+
+  <div class="custom-cursor" aria-hidden="true">💚</div>
+
+  <script src="script.js"></script>
+</body>
+</html>

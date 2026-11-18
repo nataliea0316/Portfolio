@@ -1,0 +1,667 @@
+/* =========================================================
+   Natalie Aponte Portfolio — style.css
+   ---------------------------------------------------------
+   1. Theme variables
+   2. Base / reset
+   3. Header & navigation
+   4. Layout & typography
+   5. Buttons
+   6. Skills badges
+   7. Timeline
+   8. Two Truths & a Lie cards
+   9. Projects page
+   10. Footer
+   11. Effects (reveal, cursor, falling leaves)
+   12. Responsive & accessibility
+   ========================================================= */
+
+
+/* ---------- 1. Theme variables ---------- */
+:root {
+  --bg: #F6F3F1;
+  --surface: #FFFFFF;
+  --text: #4A3A30;
+  --text-muted: #7D6A5C;
+  --accent: #A67B5B;       /* header, project links */
+  --green: #5D8B6A;        /* buttons, highlights */
+  --pink: #F8C8DC;
+  --pink-light: #FFEAFA;
+  --on-accent: #FFFFFF;
+  --shadow: rgba(93, 71, 58, 0.15);
+
+  --font-heading: 'Amatic SC', cursive;
+  --font-body: 'Open Sans', system-ui, sans-serif;
+
+  --radius: 1.25rem;
+  --ease: 0.35s cubic-bezier(.25, .8, .25, 1);
+}
+
+/* Warm (pink) theme — toggled by the button in the nav */
+body.warm {
+  --bg: #FFF5F8;
+  --accent: #C0839F;
+  --green: #9A5E90;
+  --pink: #F5D3E0;
+}
+
+
+/* ---------- 2. Base / reset ---------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  overflow-x: hidden;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* Regular bulleted lists (job duties, features, etc.) */
+.bullets {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+
+.bullets li + li {
+  margin-top: 0.4rem;
+}
+
+.bullets li::marker {
+  color: var(--accent);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--green);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 3px;
+}
+
+
+/* ---------- 3. Header & navigation ---------- */
+.site-header {
+  background: var(--accent);
+  padding: 1rem 2rem;
+  transition: background 0.4s ease;
+}
+
+.nav {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.25rem;
+}
+
+.logo {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  line-height: 1;
+  color: var(--on-accent);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.25rem;
+  margin-left: auto;   /* pushes links to the right of the logo */
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Hamburger button: only shown on small screens (see section 12) */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: 2px solid var(--on-accent);
+  border-radius: 8px;
+  padding: 0.1rem 0.6rem;
+  color: var(--on-accent);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.nav-links a {
+  position: relative;
+  color: var(--on-accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.nav-links a[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* sparkle on hover */
+.nav-links a::after {
+  content: '✨';
+  position: absolute;
+  top: -8px;
+  right: -14px;
+  font-size: 0.75rem;
+  opacity: 0;
+  transform: rotate(20deg);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  opacity: 1;
+  transform: translate(3px, 3px) rotate(0deg);
+}
+
+.theme-toggle {
+  background: var(--surface);
+  border: none;
+  border-radius: 999px;
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 6px 18px var(--shadow);
+  transition: transform var(--ease);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+
+/* ---------- 4. Layout & typography ---------- */
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+section {
+  margin-bottom: 3.5rem;
+}
+
+h2 {
+  font-family: var(--font-heading);
+  font-size: 2.75rem;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+p + p {
+  margin-top: 0.85rem;
+}
+
+#about p {
+  max-width: 65ch;     /* keeps lines a comfortable reading length */
+  font-size: 1.1rem;
+}
+
+#about .lead {
+  font-size: 1.3rem;
+  color: var(--green);
+}
+
+
+/* ---------- 5. Buttons ---------- */
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.65rem 1.25rem;
+  border: 2px solid var(--green);
+  border-radius: 10px;
+  background: var(--green);
+  color: var(--on-accent);
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform var(--ease), box-shadow var(--ease);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--shadow);
+}
+
+.button-outline {
+  background: transparent;
+  color: var(--green);
+}
+
+
+/* "Right now" highlight in the About section */
+.now-card {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  max-width: 65ch;
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  border-left: 5px solid var(--green);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: 0 8px 22px var(--shadow);
+}
+
+.now-card p {
+  margin: 0;
+  font-size: 1rem !important;
+}
+
+.now-label {
+  padding: 0.15rem 0.7rem;
+  border-radius: 999px;
+  background: var(--green);
+  color: var(--on-accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+
+/* ---------- 6. Skills badges ---------- */
+.skill-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.75rem 2rem;
+}
+
+.skill-group h3 {
+  margin-bottom: 0.75rem;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.badge {
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--pink) 0%, var(--pink-light) 70%);
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 6px 16px var(--shadow);
+  transition: transform var(--ease);
+}
+
+.badge:hover {
+  transform: translateY(-4px) scale(1.05);
+}
+
+
+/* ---------- 7. Timeline ---------- */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+/* vertical line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--pink);
+}
+
+.timeline-entry {
+  position: relative;
+}
+
+.timeline-entry + .timeline-entry {
+  margin-top: 2rem;
+}
+
+/* dot */
+.timeline-entry::before {
+  content: '';
+  position: absolute;
+  left: calc(-2rem);
+  top: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--pink);
+  box-shadow: 0 0 10px var(--pink);
+}
+
+.timeline-entry .org {
+  display: block;
+  font-weight: 600;
+  color: var(--green);
+}
+
+.timeline-entry .date {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.timeline-entry p {
+  max-width: 70ch;
+}
+
+/* the current job gets a glowing green dot */
+.timeline-entry.current::before {
+  background: var(--green);
+  box-shadow: 0 0 0 4px var(--bg), 0 0 12px var(--green);
+}
+
+
+/* ---------- 8. Two Truths & a Lie cards ---------- */
+.hint {
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.card {
+  position: relative;
+  width: 190px;
+  height: 190px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  perspective: 800px;
+  border-radius: var(--radius);
+}
+
+.card .side {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.1rem;
+  border-radius: var(--radius);
+  text-align: center;
+  font-size: 0.95rem;
+  backface-visibility: hidden;
+  box-shadow: 0 10px 26px var(--shadow);
+  transition: transform 0.6s var(--ease);
+}
+
+.card .front {
+  background: var(--surface);
+  border: 3px dashed var(--pink);
+  font-weight: 700;
+}
+
+.card .back {
+  background: var(--pink);
+  color: #5D2A4A;
+  transform: rotateY(180deg);
+}
+
+.card .result {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.card.flipped .front { transform: rotateY(180deg); }
+.card.flipped .back  { transform: rotateY(0deg); }
+
+
+/* ---------- 9. Projects page ---------- */
+.project-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: 0 12px 32px var(--shadow);
+  transition: transform var(--ease);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.project-tags li {
+  padding: 0.15rem 0.65rem;
+  border-radius: 999px;
+  background: var(--pink-light);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.project-links {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+
+.project-links a {
+  padding: 0.4rem 0.85rem;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Individual project pages (e.g. project-plant.html) */
+.back-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.project-page .lead {
+  max-width: 65ch;
+  font-size: 1.2rem;
+}
+
+.project-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.project-details section {
+  margin-bottom: 2rem;
+}
+
+.project-details h3 {
+  margin-bottom: 0.6rem;
+}
+
+.project-photo img {
+  border-radius: var(--radius);
+  box-shadow: 0 12px 30px var(--shadow);
+  transition: transform var(--ease);
+}
+
+.project-photo img:hover {
+  transform: scale(1.02);
+}
+
+.project-photo figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+
+/* ---------- 10. Footer ---------- */
+.site-footer {
+  padding: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+
+/* ---------- 11. Effects ---------- */
+
+/* Sections fade in on scroll (class added by script.js) */
+.reveal.is-hidden {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.reveal {
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Heart cursor replaces the normal arrow (script.js adds .has-mouse
+   only on devices with a mouse, so phones are unaffected) */
+html.has-mouse body {
+  cursor: none;
+}
+
+/* Heart cursor follower */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  font-size: 18px;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, opacity 0.2s ease;
+}
+
+.custom-cursor.active {
+  opacity: 1;
+}
+
+.custom-cursor.pressed {
+  transform: translate(-50%, -50%) scale(0.8);
+}
+
+/* Falling leaves easter egg (click the name) */
+.leaf {
+  position: fixed;
+  top: -40px;
+  z-index: 9998;
+  pointer-events: none;
+  user-select: none;
+  animation: fall 4s linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+
+/* ---------- 12. Responsive & accessibility ---------- */
+@media (max-width: 700px) {
+  .site-header { padding: 1rem 1.25rem; }
+  /* Mobile menu: links collapse behind the ☰ button */
+  .nav-actions { margin-left: auto; }
+  .menu-toggle { display: block; }
+  .nav-links {
+    display: none;
+    order: 3;               /* drop below the logo and buttons */
+    flex-basis: 100%;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-left: 0;
+    padding: 0.5rem 0 0.25rem;
+  }
+  .nav.open .nav-links { display: flex; }
+  .logo { font-size: 2.1rem; }
+  main { padding: 2rem 1.25rem; }
+  h2 { font-size: 2.3rem; }
+  .cards { justify-content: center; }
+  .project-layout { grid-template-columns: 1fr; }
+  .project-photo { max-width: 420px; margin: 0 auto; }
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal.is-hidden {
+    opacity: 1;
+    transform: none;
+  }
+}
